@@ -38,18 +38,15 @@ const Header = () => {
       {/* Barra superior */}
       <div className="bg-primary-600 text-white py-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center text-sm">
-            <div className="flex items-center space-x-4">
+          <div className="flex items-center text-sm relative">
+            <div className="flex items-center">
               <span>📞 Consulta tu crédito</span>
-              <span>🚚 Envío gratis por compras mayores a S/ 500</span>
             </div>
-            <div className="hidden md:flex items-center space-x-4">
-              <Link href="/ayuda" className="hover:text-primary-200 transition-colors">
-                Ayuda
-              </Link>
-              <Link href="/vende-con-nosotros" className="hover:text-primary-200 transition-colors">
-                Vende con nosotros
-              </Link>
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <span>🚚 Envío gratis por compras mayores a S/ 5000</span>
+            </div>
+            <div className="hidden md:flex items-center space-x-4 ml-auto">
+              {/* Botones removidos por solicitud del usuario */}
             </div>
           </div>
         </div>
@@ -219,12 +216,7 @@ const Header = () => {
               ♻️ Reacondicionados
             </Link>
             <div className="border-t pt-3">
-              <Link href="/ayuda" className="block text-gray-600 hover:text-primary-600 transition-colors">
-                Ayuda
-              </Link>
-              <Link href="/vende-con-nosotros" className="block text-gray-600 hover:text-primary-600 transition-colors">
-                Vende con nosotros
-              </Link>
+              {/* Botones removidos por solicitud del usuario */}
             </div>
           </div>
         </div>
