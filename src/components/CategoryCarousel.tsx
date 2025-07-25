@@ -116,7 +116,7 @@ export default function CategoryCarousel() {
   }
 
   return (
-    <section className="pb-16 bg-white">
+    <section className="py-8 bg-white">
       <div className="container mx-auto px-4">
 
         <div className="relative">
