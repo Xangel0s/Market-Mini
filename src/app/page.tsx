@@ -1,13 +1,14 @@
 'use client';
 
-import { useState } from 'react';
-import { ChevronRight, Star, Shield, Truck, Headphones } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ChevronRight, ChevronLeft, Star, Shield, Truck, Headphones } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
 import CategoryCarousel from '@/components/CategoryCarousel';
 import { sampleProducts as products } from '@/data';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   const featuredProducts = products.slice(0, 8);
 
@@ -53,18 +54,64 @@ export default function Home() {
     }
   ];
 
+  // Auto-play functionality for hero slider
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => {
+        const nextSlide = prevSlide + 1;
+        return nextSlide >= slides.length ? 0 : nextSlide;
+      });
+    }, 4000); // Change every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, slides.length]);
+
+  const goToPreviousSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentSlide((prevSlide) => {
+      const newSlide = prevSlide - 1;
+      return newSlide < 0 ? slides.length - 1 : newSlide;
+    });
+    // Resume auto-play after 5 seconds
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
+
+  const goToNextSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentSlide((prevSlide) => {
+      const newSlide = prevSlide + 1;
+      return newSlide >= slides.length ? 0 : newSlide;
+    });
+    // Resume auto-play after 5 seconds
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
+
+  const goToSlide = (index: number) => {
+    setIsAutoPlaying(false);
+    setCurrentSlide(index);
+    // Resume auto-play after 5 seconds
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Slider */}
       <section className="relative h-[500px] overflow-hidden">
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-transform duration-500 ${
-              index === currentSlide ? 'translate-x-0' : 
-              index < currentSlide ? '-translate-x-full' : 'translate-x-full'
-            }`}
-          >
+        {slides.map((slide, index) => {
+          let transformClass = 'translate-x-full';
+          if (index === currentSlide) {
+            transformClass = 'translate-x-0';
+          } else if (index < currentSlide) {
+            transformClass = '-translate-x-full';
+          }
+
+          return (
+            <div
+              key={slide.title}
+              className={`absolute inset-0 transition-transform duration-500 ${transformClass}`}
+            >
             <div className="relative h-full bg-gradient-to-r from-primary-600 to-secondary-600">
               <div className="absolute inset-0 bg-black/30"></div>
               <div className="relative container mx-auto px-4 h-full flex items-center">
@@ -80,14 +127,32 @@ export default function Home() {
               </div>
             </div>
           </div>
-        ))}
+          );
+        })}
+        
+        {/* Navigation Arrows */}
+        <button
+          onClick={goToPreviousSlide}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-colors"
+          aria-label="Slide anterior"
+        >
+          <ChevronLeft className="w-6 h-6 text-white" />
+        </button>
+
+        <button
+          onClick={goToNextSlide}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-colors"
+          aria-label="Siguiente slide"
+        >
+          <ChevronRight className="w-6 h-6 text-white" />
+        </button>
         
         {/* Slider Controls */}
         <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {slides.map((_, index) => (
+          {slides.map((slide, index) => (
             <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
+              key={`slide-indicator-${slide.title}`}
+              onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full transition-colors ${
                 index === currentSlide ? 'bg-white' : 'bg-white/50'
               }`}
@@ -117,8 +182,8 @@ export default function Home() {
       <section className="py-8 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="text-center">
+            {benefits.map((benefit) => (
+              <div key={benefit.title} className="text-center">
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 text-primary-600 rounded-full mb-4">
                   <benefit.icon className="h-8 w-8" />
                 </div>
@@ -191,10 +256,10 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[1, 2, 3].map((index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-sm border">
+              <div key={`testimonial-${index}`} className="bg-white p-6 rounded-xl shadow-sm border">
                 <div className="flex mb-4">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} className="h-5 w-5 text-yellow-400 fill-current" />
+                    <Star key={`star-${index}-${star}`} className="h-5 w-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">

@@ -174,9 +174,9 @@ export default function CategoryCarousel() {
 
           {/* Indicators */}
           <div className="flex justify-center mt-6 space-x-2">
-            {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+            {Array.from({ length: maxIndex + 1 }, (_, index) => (
               <button
-                key={`indicator-${index}`}
+                key={`carousel-pos-${index}`}
                 onClick={() => goToIndex(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
                   currentIndex === index
