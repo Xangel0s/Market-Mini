@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import { ChevronRight, Star, Shield, Truck, HeadphonesIcon } from 'lucide-react';
 import ProductCard from '@/components/ProductCard';
-import { sampleProducts as products, categories } from '@/data';
+import CategoryCarousel from '@/components/CategoryCarousel';
+import { sampleProducts as products } from '@/data';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const featuredProducts = products.slice(0, 8);
-  const popularCategories = categories.slice(0, 6);
 
   const slides = [
     {
@@ -113,35 +113,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-16">
+      {/* Welcome Section */}
+      <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">
-              Nuestros Servicios Financieros
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary-600 mb-2">
+              Bienvenido a Credicálidda: tecnología, electrodomésticos y más para tu hogar
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explora nuestras categorías de productos y servicios financieros
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {popularCategories.map((category, index) => (
-              <div
-                key={index}
-                className="group cursor-pointer text-center p-6 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 border hover:border-primary-200"
-              >
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary-100 to-secondary-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <span className="text-2xl">{category.icon}</span>
-                </div>
-                <h3 className="font-semibold text-gray-800 group-hover:text-primary-600">
-                  {category.name}
-                </h3>
-              </div>
-            ))}
+            <h3 className="text-2xl font-semibold text-gray-800">
+              Encuentra lo que buscas
+            </h3>
           </div>
         </div>
       </section>
+
+      {/* Categories Section */}
+      <CategoryCarousel />
 
       {/* Featured Products */}
       <section className="py-16 bg-gray-50">
