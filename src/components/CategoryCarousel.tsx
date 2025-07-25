@@ -70,40 +70,49 @@ export default function CategoryCarousel() {
 
   // Auto-play functionality
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying || maxIndex === 0) return
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {
-        if (prevIndex >= maxIndex) {
-          return 0
-        }
-        return prevIndex + 1
+        const nextIndex = prevIndex + 1
+        return nextIndex > maxIndex ? 0 : nextIndex
       })
     }, 3000) // Change every 3 seconds
 
     return () => clearInterval(interval)
   }, [isAutoPlaying, maxIndex])
 
+  // Reset auto-play timer when component mounts
+  useEffect(() => {
+    setIsAutoPlaying(true)
+    setCurrentIndex(0)
+  }, [])
+
   const goToPrevious = () => {
     setIsAutoPlaying(false)
     setCurrentIndex((prevIndex) => {
-      if (prevIndex <= 0) {
-        return maxIndex
-      }
-      return prevIndex - 1
+      const newIndex = prevIndex - 1
+      return newIndex < 0 ? maxIndex : newIndex
     })
-    setTimeout(() => setIsAutoPlaying(true), 5000) // Resume auto-play after 5 seconds
+    // Resume auto-play after 5 seconds
+    setTimeout(() => setIsAutoPlaying(true), 5000)
   }
 
   const goToNext = () => {
     setIsAutoPlaying(false)
     setCurrentIndex((prevIndex) => {
-      if (prevIndex >= maxIndex) {
-        return 0
-      }
-      return prevIndex + 1
+      const newIndex = prevIndex + 1
+      return newIndex > maxIndex ? 0 : newIndex
     })
-    setTimeout(() => setIsAutoPlaying(true), 5000) // Resume auto-play after 5 seconds
+    // Resume auto-play after 5 seconds
+    setTimeout(() => setIsAutoPlaying(true), 5000)
+  }
+
+  const goToIndex = (index: number) => {
+    setIsAutoPlaying(false)
+    setCurrentIndex(index)
+    // Resume auto-play after 5 seconds
+    setTimeout(() => setIsAutoPlaying(true), 5000)
   }
 
   return (
@@ -167,12 +176,8 @@ export default function CategoryCarousel() {
           <div className="flex justify-center mt-6 space-x-2">
             {Array.from({ length: maxIndex + 1 }).map((_, index) => (
               <button
-                key={index}
-                onClick={() => {
-                  setIsAutoPlaying(false)
-                  setCurrentIndex(index)
-                  setTimeout(() => setIsAutoPlaying(true), 5000)
-                }}
+                key={`indicator-${index}`}
+                onClick={() => goToIndex(index)}
                 className={`w-2 h-2 rounded-full transition-colors ${
                   currentIndex === index
                     ? 'bg-primary-500'
