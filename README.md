@@ -35,6 +35,9 @@ Market-mini es una plataforma de e-commerce moderna desarrollada con Next.js 15,
 - ✅ Paleta de colores personalizada
 - ✅ Tipografía Inter optimizada
 
+## DEMO
+http://credicalidda-marketplace.vercel.app/
+
 ## 🚀 Instalación y Uso
 
 ### Prerrequisitos
