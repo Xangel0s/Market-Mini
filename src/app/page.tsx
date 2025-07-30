@@ -190,19 +190,90 @@ export default function Home() {
       {/* Categories Section */}
       <CategoryCarousel />
 
-      {/* Benefits Section */}
-      <section className="py-8 bg-gray-50">
+
+      {/* Featured Products Carousel */}
+      <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-100 text-primary-600 rounded-full mb-4">
-                  <benefit.icon className="h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">
+              Productos Destacados
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Descubre nuestros productos financieros más populares
+            </p>
+          </div>
+          <div className="relative">
+            <button
+              onClick={goToPrevProducts}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white/100 rounded-full p-2 shadow transition-colors disabled:opacity-50"
+              aria-label="Productos anteriores"
+              disabled={featuredProducts.length <= productsPerView}
+              style={{ display: featuredProducts.length > productsPerView ? 'block' : 'none' }}
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-700" />
+            </button>
+            <div className="overflow-hidden">
+              <div className="flex transition-transform duration-500">
+                {featuredProducts
+                  .slice(productCarouselIndex, productCarouselIndex + productsPerView)
+                  .map((product) => (
+                    <div
+                      key={product.id}
+                      className="min-w-0 w-full sm:w-1/2 lg:w-1/4 flex-shrink-0 px-2"
+                      style={{ maxWidth: `${100 / productsPerView}%` }}
+                    >
+                      <ProductCard product={product} />
+                    </div>
+                  ))}
               </div>
-            ))}
+            </div>
+            <button
+              onClick={goToNextProducts}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white/100 rounded-full p-2 shadow transition-colors disabled:opacity-50"
+              aria-label="Siguientes productos"
+              disabled={featuredProducts.length <= productsPerView}
+              style={{ display: featuredProducts.length > productsPerView ? 'block' : 'none' }}
+            >
+              <ChevronRight className="w-6 h-6 text-gray-700" />
+            </button>
+          </div>
+          <div className="text-center mt-8">
+            <button className="btn-primary">
+              Ver Todos los Productos
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Nueva sección de beneficios visuales */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-14 md:gap-28">
+            {/* Despacho Gratuito */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-64 h-40 flex items-center justify-center mb-6 bg-gray-50 rounded-2xl">
+                <Image src="/benefits/despacho.webp" alt="Despacho Gratuito" width={240} height={140} className="object-contain" onError={(e) => {e.currentTarget.style.display='none';}} />
+              </div>
+              <span className="font-bold text-3xl text-primary-600">Despacho Gratuito</span>
+              <span className="text-gray-600 text-xl">Para todas tus compras</span>
+            </div>
+            {/* Paga en Cuotas */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-64 h-40 flex items-center justify-center mb-6 bg-gray-50 rounded-2xl">
+                <Image src="/benefits/cuotas.webp" alt="Paga en Cuotas" width={240} height={140} className="object-contain" onError={(e) => {e.currentTarget.style.display='none';}} />
+              </div>
+              <span className="font-bold text-3xl text-primary-600">Paga en Cuotas</span>
+              <span className="text-gray-600 text-xl">En tu recibo de Gas Natural</span>
+            </div>
+            {/* Compra en minutos */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-64 h-40 flex items-center justify-center mb-6 bg-gray-50 rounded-2xl">
+                <Image src="/benefits/minutos.webp" alt="Compra en minutos" width={240} height={140} className="object-contain" onError={(e) => {e.currentTarget.style.display='none';}} />
+              </div>
+              <span className="font-bold text-3xl text-primary-600">Compra en minutos</span>
+              <span className="text-gray-600 text-xl">Sólo necesitas tu DNI</span>
+            </div>
           </div>
         </div>
       </section>
