@@ -8,9 +8,9 @@ export const sampleProducts: Product[] = [
     description: 'iPhone 16 con chip A18, cámara avanzada y diseño elegante en color rosado.',
     price: 4064.00,
     images: [
-      'https://images.unsplash.com/photo-1592286354629-65963dde7b1e?w=400&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop'
+      '/productos_img/cel1.webp',
+      '/productos_img/cel2.webp',
+      '/productos_img/cel3.webp'
     ],
     category: 'Tecnología',
     subcategory: 'Celulares',
@@ -41,9 +41,9 @@ export const sampleProducts: Product[] = [
     price: 1659.00,
     originalPrice: 2939.00,
     images: [
-      'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1567690187548-f07b1d7bf5a9?w=400&h=400&fit=crop'
+      '/productos_img/auriculares.webp',
+      '/productos_img/metaquest.webp',
+      '/productos_img/pcagamer.webp'
     ],
     category: 'Tecnología',
     subcategory: 'Televisores',
@@ -74,8 +74,8 @@ export const sampleProducts: Product[] = [
     price: 3599.00,
     originalPrice: 4292.00,
     images: [
-      'https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=400&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop'
+      '/productos_img/cel2.webp',
+      '/productos_img/cel3.webp'
     ],
     category: 'Reacondicionados',
     subcategory: 'Celulares',
@@ -107,8 +107,8 @@ export const sampleProducts: Product[] = [
     price: 2299.00,
     originalPrice: 2874.00,
     images: [
-      'https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop'
+      '/productos_img/cel1.webp',
+      '/productos_img/auriculares.webp'
     ],
     category: 'Tecnología',
     subcategory: 'Celulares',
@@ -141,8 +141,8 @@ export const sampleProducts: Product[] = [
     description: 'Laptop HP Pavilion con procesador Intel Core i5 de 12va generación, 8GB RAM y 512GB SSD.',
     price: 2499.00,
     images: [
-      'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=400&fit=crop'
+      '/productos_img/pcagamer.webp',
+      '/productos_img/pcsillas.jpg'
     ],
     category: 'Tecnología',
     subcategory: 'Laptops',
@@ -171,8 +171,8 @@ export const sampleProducts: Product[] = [
     description: 'Samsung Galaxy A54 5G con cámara triple de 50MP, pantalla Super AMOLED y conectividad 5G.',
     price: 1299.00,
     images: [
-      'https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop',
-      'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop'
+      '/productos_img/cel3.webp',
+      '/productos_img/cel1.webp'
     ],
     category: 'Tecnología',
     subcategory: 'Celulares',

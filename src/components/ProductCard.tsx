@@ -29,36 +29,6 @@ export default function ProductCard({ product }: Readonly<ProductCardProps>) {
       className="group block bg-white rounded-lg shadow-card hover:shadow-card-hover transition-all duration-200 border border-gray-100 overflow-hidden min-w-[180px] max-w-[210px] w-full mx-auto relative"
       tabIndex={0}
     >
-      {/* Badges */}
-      <div className="absolute top-2 left-2 z-10 flex flex-col gap-1">
-        {product.featured && (
-          <span className="px-1.5 py-0.5 bg-green-500 text-white text-[10px] font-semibold rounded-full">
-            Destacado
-          </span>
-        )}
-        {product.discount && (
-          <span className="px-1.5 py-0.5 bg-red-500 text-white text-[10px] font-semibold rounded-full">
-            -{product.discount}%
-          </span>
-        )}
-      </div>
-
-      {/* Wishlist Button */}
-      <button
-        type="button"
-        onClick={e => {
-          e.preventDefault();
-          setIsWishlisted(!isWishlisted);
-        }}
-        className="absolute top-2 right-2 z-10 w-7 h-7 bg-white rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200 group-hover:scale-110"
-        tabIndex={-1}
-      >
-        <Heart
-          className={`w-4 h-4 transition-colors ${
-            isWishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-500"
-          }`}
-        />
-      </button>
 
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden min-h-[120px] max-h-[140px] bg-white flex items-center justify-center">
@@ -66,10 +36,10 @@ export default function ProductCard({ product }: Readonly<ProductCardProps>) {
           <Image
             src={product.images?.[0] || "/placeholder-product.jpg"}
             alt={product.name}
-            fill
-            className="object-contain w-full h-full"
+            width={140}
+            height={140}
+            className="object-contain mx-auto"
             onError={() => setImageError(true)}
-            sizes="(max-width: 210px) 100vw, 210px"
             priority={true}
           />
         ) : (
